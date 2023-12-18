@@ -21,6 +21,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/**").permitAll()
                 )
+                .formLogin(login -> login
+                        .loginPage("/members/login") // 로그인 페이지 (GET)
+                        .defaultSuccessUrl("/") // 로그인 성공 후 이동할 페이지
+                )
                 .build();
     }
 

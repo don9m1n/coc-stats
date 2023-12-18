@@ -2,6 +2,7 @@ package com.dmk.cocstats.domain.member.controller;
 
 import com.dmk.cocstats.domain.member.controller.dto.MemberJoinForm;
 import com.dmk.cocstats.domain.member.service.MemberService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,14 @@ public class MemberController {
     @PostMapping("/join")
     public String join(@ModelAttribute MemberJoinForm memberJoinForm, Model model) {
         model.addAttribute("member", memberService.join(memberJoinForm));
-        return "redirect:/";
+        return "redirect:/members/login";
     }
+
+    // 시큐리티를 사용하면 로그인 기능은 자동으로 처리해줌.
+    // loadByUser()
+    @GetMapping("/login")
+    public String login() {
+        return "members/login";
+    }
+
 }
