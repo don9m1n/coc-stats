@@ -18,10 +18,10 @@ public class MemberJoinForm {
 
     private String email;
 
-    public static Member of(MemberJoinForm memberJoinForm) {
+    public static Member of(MemberJoinForm memberJoinForm, String password) {
         return Member.builder()
                 .username(memberJoinForm.getUsername())
-                .password(memberJoinForm.getPassword())
+                .password(password)
                 .nickname(memberJoinForm.getNickname())
                 .email(memberJoinForm.getEmail())
                 .build();
