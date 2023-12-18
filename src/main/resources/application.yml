@@ -2,4 +2,6 @@ spring:
   profiles.active: dev
   datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 
-
+logging:
+  level:
+    com.dmk.cocstats: debug
