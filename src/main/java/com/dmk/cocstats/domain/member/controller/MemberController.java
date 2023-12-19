@@ -18,17 +18,20 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/join")
     public String joinForm(@ModelAttribute MemberJoinForm memberJoinForm) {
         return "members/join";
     }
 
+    @PreAuthorize("isAnonymous()")
     @PostMapping("/join")
     public String join(@ModelAttribute MemberJoinForm memberJoinForm, Model model) {
         model.addAttribute("member", memberService.join(memberJoinForm));
         return "redirect:/members/login";
     }
 
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
     public String loginForm() {
         return "members/login";
@@ -47,6 +50,13 @@ public class MemberController {
             @AuthenticationPrincipal MemberContext memberContext
     ) {
         memberService.updatePassword(memberContext.getId(), updatePasswordForm);
+        return "redirect:/members/logout";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete")
+    public String delete(@AuthenticationPrincipal MemberContext memberContext) {
+        memberService.delete(memberContext.getId());
         return "redirect:/members/logout";
     }
 
