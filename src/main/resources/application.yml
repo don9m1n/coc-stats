@@ -4,4 +4,5 @@ spring:
 
 logging:
   level:
+    root: info
     com.dmk.cocstats: debug
