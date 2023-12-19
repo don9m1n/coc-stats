@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
 </head>
 <body>
+    <span sec:authorize="isAuthenticated()" th:text="|${#authentication.principal.nickname}님 환영합니다!|"></span>
     <form th:action="@{/members/login}" method="post">
         <div>
             <label for="username">아이디</label>
@@ -18,5 +19,19 @@
 
         <button type="submit">로그인</button>
     </form>
+
+    <div style="display: flex; flex-direction: column;">
+        <a th:href="@{/oauth2/authorization/kakao}">
+            <img th:src="@{/images/kakao_login_medium_wide.png}" alt="kakao_button"
+                 style="width: 189px; height: 40px;">
+        </a>
+        <a th:href="@{/oauth2/authorization/naver}">
+            <img th:src="@{/images/naver_login_medium_wide.png}" alt="naver_button"
+                 style="object-fit: cover; width: 189px; height: 40px; border-radius: 5px;">
+        </a>
+        <a th:href="@{/oauth2/authorization/google}">
+            <img th:src="@{/images/google_login_medium_wide.png}" alt="google_button">
+        </a>
+    </div>
 </body>
 </html>

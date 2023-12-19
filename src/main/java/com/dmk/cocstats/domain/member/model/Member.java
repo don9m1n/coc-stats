@@ -28,4 +28,15 @@ public class Member {
     private MemberRole memberRole = MemberRole.MEMBER;
 
     private String profileImg;
+
+    public static Member of(String username, String password, String nickname, String email, String profileImg) {
+        return Member.builder()
+                .username(username)
+                .password(password)
+                .nickname(nickname)
+                .email(email)
+                .profileImg(profileImg)
+                .build();
+    }
+
 }

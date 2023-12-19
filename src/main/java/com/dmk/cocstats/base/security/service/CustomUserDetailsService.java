@@ -1,5 +1,6 @@
 package com.dmk.cocstats.base.security.service;
 
+import com.dmk.cocstats.base.security.dto.CustomSecurityMember;
 import com.dmk.cocstats.domain.member.model.Member;
 import com.dmk.cocstats.domain.member.model.MemberRole;
 import com.dmk.cocstats.domain.member.repository.MemberRepository;
@@ -26,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        log.debug("로그인 페이지에서 로그인 버튼을 누르면 loadByUsername()에서 회원 정보 검증");
+        log.debug("일반 로그인 시작: {}", username);
 
         Member member = memberRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("member not found! username: %s".formatted(username)));
@@ -38,6 +39,6 @@ public class CustomUserDetailsService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(MemberRole.MEMBER.getRole()));
         }
 
-        return new User(member.getUsername(), member.getPassword(), authorities);
+        return new CustomSecurityMember(member, authorities);
     }
 }
