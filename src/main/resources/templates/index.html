@@ -10,6 +10,8 @@
         <a sec:authorize="isAnonymous()" th:href="@{/members/login}">로그인</a>
         <span sec:authorize="isAuthenticated()" th:text="|${#authentication.principal.nickname}님 환영합니다!|"></span>
         <a sec:authorize="isAuthenticated()" th:href="@{/members/logout}">로그아웃</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/members/updatePassword}">비밀번호 변경</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/members/delete}">회원탈퇴</a>
     </header>
 
     <form th:action="@{/players}" method="get">

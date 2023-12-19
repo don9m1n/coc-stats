@@ -40,6 +40,10 @@ public class MemberService {
         member.changePassword(newPassword);
     }
 
+    public void delete(Long memberId) {
+        memberRepository.deleteById(memberId);
+    }
+
     private Member getMemberById(Long memberId) {
         return memberRepository.findById(memberId).orElseThrow();
     }
