@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Getter
-public class CustomSecurityMember extends User implements OAuth2User {
+public class MemberContext extends User implements OAuth2User {
 
     private final Long id;
     private final String nickname;
@@ -21,7 +21,7 @@ public class CustomSecurityMember extends User implements OAuth2User {
     private Map<String, Object> attributes;
     private String userNameAttributeName;
 
-    public CustomSecurityMember(Member member, Collection<? extends GrantedAuthority> authorities) {
+    public MemberContext(Member member, Collection<? extends GrantedAuthority> authorities) {
         super(member.getUsername(), member.getPassword(), authorities);
         this.id = member.getId();
         this.nickname = member.getNickname();
@@ -29,7 +29,7 @@ public class CustomSecurityMember extends User implements OAuth2User {
         this.profileImg = member.getProfileImg();
     }
 
-    public CustomSecurityMember(Member member, List<GrantedAuthority> authorities, Map<String, Object> attributes, String userNameAttributeName) {
+    public MemberContext(Member member, List<GrantedAuthority> authorities, Map<String, Object> attributes, String userNameAttributeName) {
         this(member, authorities);
         this.attributes = attributes;
         this.userNameAttributeName = userNameAttributeName;

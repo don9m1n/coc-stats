@@ -1,6 +1,6 @@
 package com.dmk.cocstats.base.security.service;
 
-import com.dmk.cocstats.base.security.dto.CustomSecurityMember;
+import com.dmk.cocstats.base.security.dto.MemberContext;
 import com.dmk.cocstats.domain.member.model.Member;
 import com.dmk.cocstats.domain.member.model.MemberRole;
 import com.dmk.cocstats.domain.member.repository.MemberRepository;
@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -63,7 +62,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(MemberRole.MEMBER.getRole()));
 
-        return new CustomSecurityMember(member, authorities, memberAttribute, userNameAttributeName);
+        return new MemberContext(member, authorities, memberAttribute, userNameAttributeName);
     }
 
     private boolean isNew(String username) {

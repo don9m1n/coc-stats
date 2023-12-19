@@ -29,6 +29,10 @@ public class Member {
 
     private String profileImg;
 
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
+
     public static Member of(String username, String password, String nickname, String email, String profileImg) {
         return Member.builder()
                 .username(username)
