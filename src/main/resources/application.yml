@@ -1,6 +1,8 @@
 spring:
   profiles.active: dev
   datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.gmail.com
 
 logging:
   level:

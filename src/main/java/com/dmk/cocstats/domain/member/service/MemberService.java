@@ -1,5 +1,6 @@
 package com.dmk.cocstats.domain.member.service;
 
+import com.dmk.cocstats.domain.email.service.EmailTokenService;
 import com.dmk.cocstats.domain.member.controller.dto.MemberJoinForm;
 import com.dmk.cocstats.domain.member.controller.dto.UpdatePasswordForm;
 import com.dmk.cocstats.domain.member.model.Member;
@@ -16,13 +17,14 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailTokenService emailTokenService;
 
-    public Member join(MemberJoinForm memberJoinForm) {
+    public void join(MemberJoinForm memberJoinForm) {
         String password = passwordEncoder.encode(memberJoinForm.getPassword());
         Member member = MemberJoinForm.of(memberJoinForm, password);
         memberRepository.save(member);
 
-        return member;
+        emailTokenService.send(member.getEmail());
     }
 
     public void updatePassword(Long memberId, UpdatePasswordForm updatePasswordForm) {

@@ -33,10 +33,11 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/") // 로그인 성공 후 이동할 페이지
                 )
                 .oauth2Login(oauth2Login -> oauth2Login
-                        .loginPage("/members/login")
+                        .loginPage("/members/login") // default -> /login
                         .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
                                 .userService(customOAuth2UserService)
                         )
+                        .defaultSuccessUrl("/") // oauth2 로그인 성공 후 이동하는
                 )
                 .logout(logout -> logout
                         .logoutUrl("/members/logout")
