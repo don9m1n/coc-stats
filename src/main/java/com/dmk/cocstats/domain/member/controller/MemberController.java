@@ -1,14 +1,15 @@
 package com.dmk.cocstats.domain.member.controller;
 
 import com.dmk.cocstats.base.security.dto.MemberContext;
+import com.dmk.cocstats.domain.email.service.EmailTokenService;
 import com.dmk.cocstats.domain.member.controller.dto.MemberJoinForm;
 import com.dmk.cocstats.domain.member.controller.dto.UpdatePasswordForm;
 import com.dmk.cocstats.domain.member.service.MemberService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
+    private final EmailTokenService emailTokenService;
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/join")
@@ -26,8 +28,15 @@ public class MemberController {
 
     @PreAuthorize("isAnonymous()")
     @PostMapping("/join")
-    public String join(@ModelAttribute MemberJoinForm memberJoinForm, Model model) {
-        model.addAttribute("member", memberService.join(memberJoinForm));
+    public String join(@ModelAttribute MemberJoinForm memberJoinForm, HttpServletResponse response) {
+        memberService.join(memberJoinForm);
+        return "redirect:/members/login";
+    }
+
+    @GetMapping("/auth-email/{email}/{token}")
+    public String authEmailToken(@PathVariable String email, @PathVariable String token) {
+        emailTokenService.authEmailToken(email, token);
+
         return "redirect:/members/login";
     }
 

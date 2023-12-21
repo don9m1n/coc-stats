@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         log.debug("일반 로그인 시작: {}", username);
 
-        Member member = memberRepository.findByUsername(username)
+        Member member = memberRepository.findByUsernameAndEmailAuthIsTrue(username)
                 .orElseThrow(() -> new UsernameNotFoundException("member not found! username: %s".formatted(username)));
 
         List<GrantedAuthority> authorities = new ArrayList<>();
