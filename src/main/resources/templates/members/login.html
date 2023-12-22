@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
 <head>
-    <meta charset="UTF-8">
     <title>로그인</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
-<body>
-    <span sec:authorize="isAuthenticated()" th:text="|${#authentication.principal.nickname}님 환영합니다!|"></span>
+<div layout:fragment="content" class="my-3">
     <form th:action="@{/members/login}" method="post">
         <div>
             <label for="username">아이디</label>
@@ -20,18 +18,16 @@
         <button type="submit">로그인</button>
     </form>
 
-    <div style="display: flex; flex-direction: column;">
+    <div class="social-btn">
         <a th:href="@{/oauth2/authorization/kakao}">
-            <img th:src="@{/images/kakao_login_medium_wide.png}" alt="kakao_button"
-                 style="width: 189px; height: 40px;">
+            <img th:src="@{/images/kakao_login_medium_wide.png}" class="kakao-btn" alt="kakao_button">
         </a>
         <a th:href="@{/oauth2/authorization/naver}">
-            <img th:src="@{/images/naver_login_medium_wide.png}" alt="naver_button"
-                 style="object-fit: cover; width: 189px; height: 40px; border-radius: 5px;">
+            <img th:src="@{/images/naver_login_medium_wide.png}" class="naver-btn" alt="naver_button">
         </a>
         <a th:href="@{/oauth2/authorization/google}">
-            <img th:src="@{/images/google_login_medium_wide.png}" alt="google_button">
+            <img th:src="@{/images/google_login_medium_wide.png}" class="google-btn" alt="google_button">
         </a>
     </div>
-</body>
+</div>
 </html>
