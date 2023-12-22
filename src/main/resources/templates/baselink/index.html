@@ -1,0 +1,45 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
+<head>
+    <title>배치 링크 게시판</title>
+  <style>
+    .cards > .card {
+      margin: 10px;
+    }
+  </style>
+</head>
+<div layout:fragment="content" class="d-flex my-3">
+  <div class="w-25 me-3">
+    <div class="h-50 rounded-5" style="border: 1px solid red;"></div>
+  </div>
+  <div class="cards d-flex justify-content-center align-content-start flex-wrap w-75 h-100" style="border: 1px solid red;" th:object="${baseLinkArticles}">
+    <div class="card" style="width: 18rem;" th:each="article : ${baseLinkArticles}">
+      <img src="https://media.oneclash.com/layout/thumbniled-9FE0F415-0775-4130-BB34-FD28F78BB4AF.jpg" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title">Dongmin Kim</h5>
+        <p class="card-text" th:text="${article.title}"></p>
+        <p class="card-text" th:text="${article.content}"></p>
+        <a href="#" class="btn btn-primary">Read More</a>
+      </div>
+    </div>
+    <nav aria-label="Page navigation example" style="border: 1px solid red">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <li class="page-item" th:each="page : ${#numbers.sequence(1, totalPages)}">
+          <a class="page-link" th:href="@{/bases(page=${page - 1})}" th:text="${page}"></a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+</html>

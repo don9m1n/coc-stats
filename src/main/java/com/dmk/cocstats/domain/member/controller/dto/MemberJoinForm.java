@@ -1,11 +1,13 @@
 package com.dmk.cocstats.domain.member.controller.dto;
 
 import com.dmk.cocstats.domain.member.model.Member;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberJoinForm {
 
     private String username;
