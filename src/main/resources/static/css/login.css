@@ -1,0 +1,16 @@
+.social-btn {
+    display: flex;
+    flex-direction: column;
+}
+
+.social-btn .kakao-btn {
+    width: 189px;
+    height: 40px;
+}
+
+.social-btn .naver-btn {
+    object-fit: cover;
+    width: 189px;
+    height: 40px;
+    border-radius: 5px;
+}

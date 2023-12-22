@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Header Template</title>
+</head>
+<body>
+  <header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li>
+            <a th:href="@{/}" class="nav-link px-2 text-white text-decoration-none">COC STATS</a>
+          </li>
+        </ul>
+
+        <div class="text-end">
+          <a th:href="@{/members/join}" sec:authorize="isAnonymous()" class="btn btn-success">회원가입</a>
+          <a th:href="@{/members/login}" sec:authorize="isAnonymous()" class="btn btn-primary">로그인</a>
+          <span sec:authorize="isAuthenticated()" th:text="${#authentication.principal.nickname}"></span>
+          <a th:href="@{/members/logout}" sec:authorize="isAuthenticated()" class="btn btn-warning">로그아웃</a>
+        </div>
+      </div>
+    </div>
+  </header>
+</body>
+</html>
