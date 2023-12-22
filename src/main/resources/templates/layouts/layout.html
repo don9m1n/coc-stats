@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>COC Stats</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="">
+    <meta name="author" content="Dongmin Kim">
+
+    <!-- bootstrap  -->
+    <script defer th:src="@{/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header th:replace="~{layouts/header :: header}"></header>
+
+    <main class="container flex-grow-1">
+        <div layout:fragment="content"></div>
+    </main>
+
+    <footer th:replace="~{layouts/footer :: footer}"></footer>
+</body>
+</html>
