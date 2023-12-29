@@ -1,0 +1,62 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
+<div layout:fragment="content" class="my-3">
+  <div class="row">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+          <th>조회수</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="article : ${articles}">
+          <td th:text="${article.id}"></td>
+          <td>
+            <a th:href="@{|/articles/${article.id}|}" th:text="${article.title}"></a>
+          </td>
+          <td th:text="${article.nickname}"></td>
+          <td th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd')}"></td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a class="btn btn-primary me-md-2" role="button" th:href="@{/articles/articleForm}">글쓰기</a>
+    </div>
+  </div>
+
+  <nav id="pagination">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link"
+           th:text="prev"
+           th:classappend="${articles.number <= 0} ? 'disabled' : ''"
+           th:href="@{/articles(page = ${articles.number - 1})}">
+        </a>
+      </li>
+
+      <li class="page-item" th:each="page : ${paginationBar}">
+        <a class="page-link"
+           th:text="${page + 1}"
+           th:classappend="${articles.number == page} ? 'active' : ''"
+           th:href="@{/articles(page = ${page})}"></a>
+      </li>
+
+      <li class="page-item">
+        <a class="page-link"
+           th:text="next"
+           th:classappend="${articles.number >= articles.totalPages - 1} ? 'disabled' : ''"
+           th:href="@{/articles(page = ${articles.number + 1})}">
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</div>
+</html>

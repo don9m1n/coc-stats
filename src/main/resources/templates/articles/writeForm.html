@@ -1,0 +1,30 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
+<head>
+    <title>글 쓰기</title>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"/>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css"/>
+    <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+
+    <!-- prismjs Languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-clojure.min.js"></script>
+
+    <script defer th:src="@{/js/articles/articleForm.js}"></script>
+</head>
+<div layout:fragment="content" class="my-3">
+    <form th:action="@{/articles/write}" method="post" th:object="${articleForm}" onsubmit="form_submit(this); return false;">
+
+        <label for="title">제목</label>
+        <input type="text" id="title" class="form-control" th:field="*{title}">
+
+        <div id="editor"></div>
+        <input type="hidden" name="content" placeholder="toast editor html value"/>
+
+
+        <button type="submit" class="btn btn-success">글 쓰기</button>
+    </form>
+</div>
+</html>
