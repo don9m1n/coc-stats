@@ -1,12 +1,11 @@
 package com.dmk.cocstats.base;
 
+import com.dmk.cocstats.domain.article.controller.dto.ArticleForm;
+import com.dmk.cocstats.domain.article.service.ArticleService;
 import com.dmk.cocstats.domain.baselink.controller.dto.WriteForm;
-import com.dmk.cocstats.domain.baselink.model.BaseLinkArticle;
 import com.dmk.cocstats.domain.baselink.service.BaseLinkArticleService;
-import com.dmk.cocstats.domain.member.controller.dto.MemberJoinForm;
 import com.dmk.cocstats.domain.member.model.Member;
 import com.dmk.cocstats.domain.member.repository.MemberRepository;
-import com.dmk.cocstats.domain.member.service.MemberService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class InitDevData {
 
     @Bean
-    CommandLineRunner init(BaseLinkArticleService baseLinkArticleService, MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+    CommandLineRunner init(ArticleService articleService, BaseLinkArticleService baseLinkArticleService, MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             Member member1 = Member.of("donmin", passwordEncoder.encode("1234"), "Keria", "dongmin@email.com", null);
             memberRepository.save(member1);
@@ -28,6 +27,14 @@ public class InitDevData {
 
             for (int i = 1; i <= 10; i++) {
                 baseLinkArticleService.saveArticle(create("title" + i, "content" + i));
+            }
+
+            for (int i = 1; i <= 22; i++) {
+                ArticleForm form = ArticleForm.builder()
+                        .title("제목" + i)
+                        .content("내용" + i)
+                        .build();
+                articleService.write(member1.getId(), form);
             }
         };
     }
