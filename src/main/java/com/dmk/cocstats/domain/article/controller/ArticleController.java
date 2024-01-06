@@ -6,6 +6,7 @@ import com.dmk.cocstats.domain.article.controller.dto.ArticleResponse;
 import com.dmk.cocstats.domain.article.model.FormStatus;
 import com.dmk.cocstats.domain.article.service.ArticleService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/articles")
+@Slf4j
 @RequiredArgsConstructor
 public class ArticleController {
 
@@ -76,9 +78,14 @@ public class ArticleController {
 
     @PostMapping("/{articleId}/form")
     public String updateArticle(@PathVariable Long articleId, ArticleRequest articleRequest) {
-        System.out.println("articleRequest = " + articleRequest.getTitle());
-        System.out.println("articleRequest = " + articleRequest.getContent());
         articleService.updateArticle(articleId, articleRequest);
         return "redirect:/articles/" + articleId;
+    }
+
+    @PostMapping("/{articleId}/delete")
+    public String deleteArticle(@PathVariable Long articleId, @AuthenticationPrincipal MemberContext memberContext) {
+        log.debug("articleId: {}, memberId: {}", articleId, memberContext.getId());
+        articleService.deleteArticle(articleId, memberContext.getId());
+        return "redirect:/articles";
     }
 }
