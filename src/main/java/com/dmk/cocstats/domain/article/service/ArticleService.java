@@ -20,16 +20,19 @@ public class ArticleService {
     private final MemberRepository memberRepository;
     private final ArticleRepository articleRepository;
 
+
+    @Transactional(readOnly = true)
     public Page<ArticleResponse> articles(Pageable pageable) {
         return articleRepository.findAll(pageable).map(ArticleResponse::fromArticle);
     }
 
+    @Transactional(readOnly = true)
     public ArticleResponse article(Long articleId) {
         Article article = articleRepository.findById(articleId).orElseThrow();
         return ArticleResponse.fromArticle(article);
     }
 
-    public ArticleResponse write(Long memberId, ArticleRequest articleRequest) {
+    public ArticleResponse saveArticle(Long memberId, ArticleRequest articleRequest) {
         Member member = memberRepository.findById(memberId).orElseThrow();
 
         Article article = articleRepository.save(ArticleRequest.of(articleRequest, member));

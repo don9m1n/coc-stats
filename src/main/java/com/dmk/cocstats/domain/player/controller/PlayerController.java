@@ -1,6 +1,5 @@
 package com.dmk.cocstats.domain.player.controller;
 
-import com.dmk.cocstats.domain.player.model.Player;
 import com.dmk.cocstats.domain.player.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

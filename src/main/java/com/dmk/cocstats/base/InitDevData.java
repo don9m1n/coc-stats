@@ -34,7 +34,7 @@ public class InitDevData {
                         .title("제목" + i)
                         .content("내용" + i)
                         .build();
-                articleService.write(member1.getId(), form);
+                articleService.saveArticle(member1.getId(), form);
             }
         };
     }
