@@ -1,0 +1,34 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
+<head>
+    <title>글 쓰기</title>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"/>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css"/>
+    <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+
+    <!-- prismjs Languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-clojure.min.js"></script>
+
+    <script defer th:src="@{/js/articles/form.js}"></script>
+</head>
+<div layout:fragment="content" class="my-3">
+    <h1 th:text="${formStatus} ? '게시글 ' + ${formStatus.description}"></h1>
+    <form name="form" method="post" onsubmit="form_submit(this); return false;"
+          th:action="${formStatus.update} ? '/articles/' + ${article.id} + '/form' : '/articles/form'">
+
+        <label for="title">제목</label>
+        <input type="text" class="form-control mb-3" id="title" name="title" th:value="*{article?.title}">
+
+        <div id="editor" class="mb-3"></div>
+        <input type="hidden" name="content" th:value="*{article?.content}"/>
+
+        <div class="btns">
+            <button type="submit" class="btn btn-primary" th:text="${formStatus?.description}"></button>
+            <button type="button" class="btn btn-secondary" id="cancel-button" th:onclick="'history.back()'">취소</button>
+        </div>
+    </form>
+</div>
+</html>

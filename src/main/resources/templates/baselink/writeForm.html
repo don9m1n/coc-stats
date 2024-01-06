@@ -1,6 +1,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
 <div layout:fragment="content" class="my-3">
-    <form th:action="@{/bases/write}" method="post" th:object="${writeForm}">
+    <form th:action="@{/bases/write}" method="post" th:object="${articleRequest}">
         <label for="title"></label>
         <input type="text" id="title" class="form-control" th:field="*{title}">
 

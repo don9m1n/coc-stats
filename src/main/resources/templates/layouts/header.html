@@ -12,8 +12,9 @@
           <li>
             <a th:href="@{/}" class="nav-link px-2 text-white text-decoration-none">COC STATS</a>
           </li>
-          <li>
-            <a th:href="@{/bases}" class="nav-link px-2 text-secondary">배치 링크 게시판으로 이동</a>
+          <li sec:authorize="isAuthenticated()" style="border: 1px solid red; display: flex;">
+            <a th:href="@{/bases}" class="nav-link px-2 text-secondary">배치 링크 게시판</a>
+            <a th:href="@{/articles}" class="nav-link px-2 text-secondary">잡담 게시판</a>
           </li>
         </ul>
 
