@@ -1,6 +1,6 @@
 package com.dmk.cocstats.base;
 
-import com.dmk.cocstats.domain.article.controller.dto.ArticleForm;
+import com.dmk.cocstats.domain.article.controller.dto.ArticleRequest;
 import com.dmk.cocstats.domain.article.service.ArticleService;
 import com.dmk.cocstats.domain.baselink.controller.dto.WriteForm;
 import com.dmk.cocstats.domain.baselink.service.BaseLinkArticleService;
@@ -30,7 +30,7 @@ public class InitDevData {
             }
 
             for (int i = 1; i <= 22; i++) {
-                ArticleForm form = ArticleForm.builder()
+                ArticleRequest form = ArticleRequest.builder()
                         .title("제목" + i)
                         .content("내용" + i)
                         .build();

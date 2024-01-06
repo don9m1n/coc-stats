@@ -1,6 +1,6 @@
 package com.dmk.cocstats.domain.article.service;
 
-import com.dmk.cocstats.domain.article.controller.dto.ArticleForm;
+import com.dmk.cocstats.domain.article.controller.dto.ArticleRequest;
 import com.dmk.cocstats.domain.article.controller.dto.ArticleResponse;
 import com.dmk.cocstats.domain.article.model.Article;
 import com.dmk.cocstats.domain.article.repository.ArticleRepository;
@@ -29,13 +29,24 @@ public class ArticleService {
         return ArticleResponse.fromArticle(article);
     }
 
-    public ArticleResponse write(Long memberId, ArticleForm articleForm) {
+    public ArticleResponse write(Long memberId, ArticleRequest articleRequest) {
         Member member = memberRepository.findById(memberId).orElseThrow();
 
-        Article article = articleRepository.save(ArticleForm.of(articleForm, member));
+        Article article = articleRepository.save(ArticleRequest.of(articleRequest, member));
         return ArticleResponse.fromArticle(article);
     }
 
 
+    public void updateArticle(Long articleId, ArticleRequest articleRequest) {
+        Article article = articleRepository.findById(articleId).orElseThrow();
 
+        if (articleRequest.getTitle() != null) {
+            article.setTitle(articleRequest.getTitle());
+        }
+        if (articleRequest.getContent() != null) {
+            article.setContent(articleRequest.getContent());
+        }
+
+        articleRepository.save(article);
+    }
 }

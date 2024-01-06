@@ -7,7 +7,7 @@ const editor = new Editor({
     el: document.querySelector('#editor'),
     height: '500px',
     initialEditType: 'markdown',
-    initialValue: '내용을 입력해 주세요.',
+    initialValue: document.form.content.value,
     previewStyle: 'vertical',
     plugins: [[codeSyntaxHighlight, { highlighter: Prism }]]
 });

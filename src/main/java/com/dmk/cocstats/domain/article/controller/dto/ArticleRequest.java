@@ -9,16 +9,15 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArticleForm {
+public class ArticleRequest {
 
-    private String type; // 공지, 설문, 일반
     private String title;
     private String content;
 
-    public static Article of(ArticleForm articleForm, Member member) {
+    public static Article of(ArticleRequest articleRequest, Member member) {
         return Article.builder()
-                .title(articleForm.getTitle())
-                .content(articleForm.getContent())
+                .title(articleRequest.getTitle())
+                .content(articleRequest.getContent())
                 .member(member)
                 .build();
     }

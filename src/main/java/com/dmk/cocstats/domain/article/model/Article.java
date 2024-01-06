@@ -10,6 +10,7 @@ import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
