@@ -1,5 +1,7 @@
 package com.dmk.cocstats.domain.article.service;
 
+import com.dmk.cocstats.base.exception.ErrorCode;
+import com.dmk.cocstats.base.exception.custom.NotFoundException;
 import com.dmk.cocstats.domain.article.controller.dto.ArticleRequest;
 import com.dmk.cocstats.domain.article.controller.dto.ArticleResponse;
 import com.dmk.cocstats.domain.article.model.Article;
@@ -28,7 +30,8 @@ public class ArticleService {
 
     @Transactional(readOnly = true)
     public ArticleResponse article(Long articleId) {
-        Article article = articleRepository.findById(articleId).orElseThrow();
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_ARTICLE));
         return ArticleResponse.fromArticle(article);
     }
 
